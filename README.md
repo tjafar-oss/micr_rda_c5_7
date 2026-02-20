@@ -4,3 +4,5 @@ project directory for homework assignment 5, focusing on data import and tidying
 
 
 "Good code" 
+
+good organization
