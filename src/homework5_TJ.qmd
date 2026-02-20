@@ -1,0 +1,32 @@
+---
+title: "assignment 5"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+students_raw <- read_csv( "data/sample_data.csv", na = "N/A" )
+
+students <- students_raw |> clean_names() |> mutate( age = case_when( age == "five" ~ "5", TRUE ~ age ),age = as.integer(age) )
+```
+
+You can add options to executable code like this
+
+```{r}
+colloquium_long <- colloquium_assessment |> tidyr::pivot_longer( cols = Q5:Q9, names_to = "question", values_to = "score")
+```
+
+```{r}
+avg_q7_10 <- colloquium_long |> filter(question %in% c("Q7", "Q8", "Q9", "Q10")) |>  filter(score %in% c("1","2","3","4","5")) |> mutate(score = as.numeric(score)) |> group_by(question) |> summarise(mean_score = mean(score, na.rm = TRUE))
+glimpse(avg_q7_10)
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).l
